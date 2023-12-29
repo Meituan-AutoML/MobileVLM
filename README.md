@@ -20,7 +20,7 @@ Figure 1. The MobileVLM architecture (right) utilizes MobileLLaMA as its languag
 We release MobileLLaMA weights in a PyTorch format can be conveniently used with the Hugging Face transformers library. Our checkpoint weights is licensed permissively under the Apache 2.0 license.
 
 ### Install
-- Clone this repository and navigate to LLaVA folder
+- Clone this repository and navigate to MobileVLM folder
 ```shell
 git clone https://github.com/Meituan-AutoML/MobileVLM.git
 cd MobileVLM
