@@ -10,6 +10,7 @@ We present MobileVLM, a competent multimodal vision language model (MMVLM) targe
 Figure 1. The MobileVLM architecture (right) utilizes MobileLLaMA as its language model, intakes $\mathbf{X}_v$ and $\mathbf{X}_q$ which are image and language instructions as respective inputs and gives $\mathbf{Y}_a$ as the output language response. LDP refers to a lightweight downsample projector (left).
 
 ## Weights Release and Usage
+MobileVLM weights are in preparation, will be released soon.
 We release MobileLLaMA weights in a PyTorch format can be conveniently used with the Hugging Face transformers library. Our checkpoint weights is licensed permissively under the Apache 2.0 license.
 
 ### Install
@@ -55,7 +56,7 @@ The model can be evaluated with [lm-eval-harness](https://github.com/EleutherAI/
 
 
 ### MobileVLM weights 
-
+Preparing.
 
 ## Reference
 
