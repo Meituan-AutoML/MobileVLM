@@ -14,7 +14,7 @@ Figure 1. The MobileVLM architecture (right) utilizes MobileLLaMA as its languag
 - [ ] MobileVLM weights and inference code.
 - [ ] MobileVLM training code.
 - [ ] MobileLLaMA SFT training code.
-- [ ] MobileLLaMA Pre-training code of model.
+- [ ] MobileLLaMA Pre-training code.
 
 ## Weights Release and Usage
 We release MobileLLaMA weights in a PyTorch format can be conveniently used with the Hugging Face transformers library. Our checkpoint weights is licensed permissively under the Apache 2.0 license.
