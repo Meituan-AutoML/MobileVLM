@@ -9,8 +9,14 @@ We present MobileVLM, a competent multimodal vision language model (MMVLM) targe
 
 Figure 1. The MobileVLM architecture (right) utilizes MobileLLaMA as its language model, intakes $\mathbf{X}_v$ and $\mathbf{X}_q$ which are image and language instructions as respective inputs and gives $\mathbf{Y}_a$ as the output language response. LDP refers to a lightweight downsample projector (left).
 
+## Todo
+- [x] MobileLLaMA weights and inference example.
+- [ ] MobileVLM weights and inference code.
+- [ ] MobileVLM training code.
+- [ ] MobileLLaMA SFT training code.
+- [ ] MobileLLaMA Pre-training code of model.
+
 ## Weights Release and Usage
-MobileVLM weights are in preparation, will be released soon.
 We release MobileLLaMA weights in a PyTorch format can be conveniently used with the Hugging Face transformers library. Our checkpoint weights is licensed permissively under the Apache 2.0 license.
 
 ### Install
@@ -33,7 +39,6 @@ cd MobileVLM
 import torch
 from transformers import LlamaTokenizer, LlamaForCausalLM
 
-## v2 models
 model_path = 'mtgv/MobileLLaMA-1.4B-Base'
 
 tokenizer = LlamaTokenizer.from_pretrained(model_path)
