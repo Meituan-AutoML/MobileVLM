@@ -56,3 +56,18 @@ The model can be evaluated with [lm-eval-harness](https://github.com/EleutherAI/
 
 
 ### MobileVLM weights 
+
+
+## Reference
+
+If you found MobileVLM or MobileLLaMA useful in your research or applications, please cite using the following BibTeX:
+```
+@misc{chu2023mobilevlm,
+      title={MobileVLM : A Fast, Reproducible and Strong Vision Language Assistant for Mobile Devices}, 
+      author={Xiangxiang Chu and Limeng Qiao and Xinyang Lin and Shuang Xu and Yang Yang and Yiming Hu and Fei Wei and Xinyu Zhang and Bo Zhang and Xiaolin Wei and Chunhua Shen},
+      year={2023},
+      eprint={2312.16886},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
+}
+```
