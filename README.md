@@ -5,13 +5,19 @@
 
 We present MobileVLM, a competent multimodal vision language model (MMVLM) targeted to run on mobile devices. It is an amalgamation of a myriad of architectural designs and techniques that are mobile-oriented, which comprises a set of language models at the scale of 1.4B and 2.7B parameters, trained from scratch, a multimodal vision model that is pre-trained in the CLIP fashion, cross-modality interaction via an efficient projector. We evaluate MobileVLM on several typical VLM benchmarks. Our models demonstrate on par performance compared with a few much larger models. More importantly, we measure the inference speed on both a Qualcomm Snapdragon 888 CPU and an NVIDIA Jeston Orin GPU, and we obtain state-of-the-art performance of 21.5 tokens and 65.3 tokens per second, respectively.
 
-![MobileVLM Architecture](mobilellava.pdf)
+![MobileVLM Architecture](mobilellava.png)
+
 Figure 1. The MobileVLM architecture (right) utilizes MobileLLaMA as its language model, intakes $\mathbf{X}_v$ and $\mathbf{X}_q$ which are image and language instructions as respective inputs and gives $\mathbf{Y}_a$ as the output language response. LDP refers to a lightweight downsample projector (left).
 
 ## Weights Release and Usage
 We release MobileLLaMA weights in a PyTorch format can be conveniently used with the Hugging Face transformers library. Our checkpoint weights is licensed permissively under the Apache 2.0 license.
 
 ### Install
+- Clone this repository and navigate to LLaVA folder
+```shell
+git clone https://github.com/Meituan-AutoML/MobileVLM.git
+cd MobileVLM
+```
 
 ### MobileLLaMA weights
 
@@ -22,7 +28,7 @@ We release MobileLLaMA weights in a PyTorch format can be conveniently used with
 - [MobileLLaMA-2.7B-Base](https://huggingface.co/openlm-research/open_llama_3b)
 - [MobileLLaMA-2.7B-Chat](https://huggingface.co/openlm-research/open_llama_7b) -->
 
-#### Example for model inference
+#### Example for MobileLLaMA model inference
 ```python
 import torch
 from transformers import LlamaTokenizer, LlamaForCausalLM
