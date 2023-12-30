@@ -1,4 +1,4 @@
-#  MobileVLM: A Fast, Strong and Open Vision Language Assistant for Mobile Devices
+#  MobileVLM : A Fast, Reproducible and Strong Vision Language Assistant for Mobile Devices
 
 <a href='https://github.com/Meituan-AutoML/MobileVLM'><img src='https://img.shields.io/badge/Project-Page-Green'></a>
 <a href='https://arxiv.org/abs/2312.16886'><img src='https://img.shields.io/badge/Paper-Arxiv-red'></a>
