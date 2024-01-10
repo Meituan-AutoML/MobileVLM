@@ -59,7 +59,7 @@ The MobileVLM architecture (right) utilizes MobileLLaMA as its language model, i
 import torch
 from transformers import LlamaTokenizer, LlamaForCausalLM
 
-model_path = 'mtgv/MobileLLaMA-1.4B-Base'
+model_path = 'mtgv/MobileLLaMA-1.4B-Chat'
 
 tokenizer = LlamaTokenizer.from_pretrained(model_path)
 model = LlamaForCausalLM.from_pretrained(
@@ -74,7 +74,7 @@ generation_output = model.generate(
 )
 print(tokenizer.decode(generation_output[0]))
 ```
-* For more advanced usage, please follow the [transformers LLaMA documentation](https://huggingface.co/docs/transformers/main/model_doc/llama).
+* Same for our Base and Chat model. For more advanced usage, please follow the [transformers LLaMA documentation](https://huggingface.co/docs/transformers/main/model_doc/llama).
 
 #### Example for MobileVLM model inference
 
