@@ -74,7 +74,7 @@ generation_output = model.generate(
 )
 print(tokenizer.decode(generation_output[0]))
 ```
-* Same for our Base and Chat model. For more advanced usage, please follow the [transformers LLaMA documentation](https://huggingface.co/docs/transformers/main/model_doc/llama).
+* For more advanced usage, please follow the [transformers LLaMA documentation](https://huggingface.co/docs/transformers/main/model_doc/llama).
 
 #### Example for MobileVLM model inference
 
