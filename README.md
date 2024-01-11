@@ -1,4 +1,4 @@
-#  MobileVLM: A Fast, Strong and Open Vision Language Assistant for Mobile Devices
+# <center> MobileVLM: A Fast, Strong and Open <br> Vision Language Assistant for Mobile Devices
 
 <a href='https://github.com/Meituan-AutoML/MobileVLM'><img src='https://img.shields.io/badge/Project-Page-Green'></a>
 <a href='https://arxiv.org/abs/2312.16886'><img src='https://img.shields.io/badge/Paper-Arxiv-red'></a>
@@ -91,6 +91,8 @@ args = type('Args', (), {
     "top_p": None,
     "num_beams": 1,
     "max_new_tokens": 512,
+    "load_8bit": False,
+    "load_4bit": False,
 })()
 
 inference_once(args)
@@ -104,7 +106,7 @@ The training process of MobileVLM is divided into two stages:
 
 - stage I: feature alignment pretrain
   - ❄️ frozen vision encoder + 🔥 **learnable** LDP projector + ❄️ frozen LLM
-  - this training process takes around **1~2 hours** for MobileVLM-1.7B/3B on 8x A100 (80G) with a batch size of 256 and an average of approximately 15G/19G of GPU memory required.
+  - this training process takes around **1~1.5 hours** for MobileVLM-1.7B/3B on 8x A100 (80G) with a batch size of 256 and an average of approximately 15G/19G of GPU memory required.
 - stage II: visual instruction tuning
   - ❄️ frozen vision encoder + 🔥 **learnable** LDP projector + 🔥 **learnable** LLM
   - this training process takes around **2~3.5 hours** for MobileVLM-1.7B/3B on 8x A100 (80G) with a batch size of 128 and an average of approximately 46G/52G of GPU memory required.
@@ -113,7 +115,7 @@ Note: To train on fewer GPU memory or cards, you can reduce the `per_device_trai
 
 #### 1️⃣ Prepare MobileLLaMA checkpoints
 
-Download MobileLLaMA chatbot checkpoints from 🤗 huggingface website ([1.7B](https://huggingface.co/mtgv/MobileLLaMA-1.4B-Chat), [2.7B](https://huggingface.co/mtgv/MobileLLaMA-3B-Chat)). Please note that this is **optional** (it depends on your working environment), run the training script we provide below and the model will be automatically downloaded by the `transformers` library.
+Download MobileLLaMA chatbot checkpoints from huggingface website (🤗 [1.7B](https://huggingface.co/mtgv/MobileLLaMA-1.4B-Chat), [2.7B](https://huggingface.co/mtgv/MobileLLaMA-3B-Chat)). Please note that this is **optional** (it depends on your working environment), run the training script we provide below and the model will be automatically downloaded by the `transformers` library.
 
 #### 2️⃣ Prepare data
 - For convenience, assume your working directory `/path/to/project/mobilevlm` as `work_dir`: 
