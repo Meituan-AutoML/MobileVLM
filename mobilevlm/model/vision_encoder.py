@@ -16,6 +16,7 @@ class CLIPVisionTower(nn.Module):
             self.load_model() 
         else:
             self.cfg_only = CLIPVisionConfig.from_pretrained(self.vision_tower_name)
+            self.vision_tower = CLIPVisionModel.from_pretrained(self.vision_tower_name)  # dummy-load
 
     def load_model(self):
         self.image_processor = CLIPImageProcessor.from_pretrained(self.vision_tower_name)
