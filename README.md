@@ -14,6 +14,7 @@ The MobileVLM architecture (right) utilizes MobileLLaMA as its language model, i
 
 * ⏳ MobileLLaMA Pre-training code.
 * ⏳ MobileLLaMA SFT training code.
+* **`Jan. 15th, 2024`**: Customized `llama.cpp` for **MobileVLM** and its [deployment instruction](#deployment-on-mobile-devices) on Mobile Devices.
 * **`Jan. 11st, 2024`**: The training and evaluation codes of MobileVLM are available now! Follow these  step-by-step instructions below to easily train your own mobileVLM in **5 hours** ⚡️ !
 * **`Dec. 31st, 2023`**: Our MobileVLM weights are uploaded on the HuggingFace website. We also provide inference examples for the MobileLLaMA/MobileVLM model so that anyone can enjoy [them](https://huggingface.co/mtgv/) early.
 * **`Dec. 29th, 2023`**: Our MobileLLaMA weights are uploaded on the HuggingFace website. Enjoy [them](https://huggingface.co/mtgv/) !
@@ -224,7 +225,7 @@ bash run.sh mobilevlm1.7b pretrain-finetune-test ${LANGUAGE_MODEL} ${VISION_MODE
 ```
 
 - Note 🧭: We place all running commands in `run.sh` so they can be run with one click for simplification. If you would like to modify some super-parameters to observe their impact, please dive into `run.sh` to explore.
-
+## <h2 id="deployment-on-mobile-devices">📲Deployment on Mobile Devices </h2>
 ## 🤝 Acknowledgments
 
 - [LLaVA](https://github.com/haotian-liu/LLaVA): the codebase we built upon. Thanks for their wonderful work! 👏
