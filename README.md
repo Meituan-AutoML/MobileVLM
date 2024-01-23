@@ -14,6 +14,7 @@ The MobileVLM architecture (right) utilizes MobileLLaMA as its language model, i
 
 * ⏳ MobileLLaMA Pre-training code.
 * ⏳ MobileLLaMA SFT training code.
+* **`Jan. 23th, 2024`**: 🚀🚀🚀 **MobileVLM** is officially supported by [`llama.cpp`](https://github.com/ggerganov/llama.cpp/blob/master/examples/llava/MobileVLM-README.md) now ! Have a try !
 * **`Jan. 15th, 2024`**: Customized `llama.cpp` for **MobileVLM** and its [deployment instruction](#deployment-on-mobile-devices) on mobile devices.
 * **`Jan. 11st, 2024`**: The training and evaluation codes of MobileVLM are available now! Follow these  step-by-step instructions below to easily train your own mobileVLM in **5 hours** ⚡️ !
 * **`Dec. 31st, 2023`**: Our MobileVLM weights are uploaded on the HuggingFace website. We also provide inference examples for the MobileLLaMA/MobileVLM model so that anyone can enjoy [them](https://huggingface.co/mtgv/) early.
@@ -225,9 +226,10 @@ bash run.sh mobilevlm1.7b pretrain-finetune-test ${LANGUAGE_MODEL} ${VISION_MODE
 ```
 
 - Note 🧭: We place all running commands in `run.sh` so they can be run with one click for simplification. If you would like to modify some super-parameters to observe their impact, please dive into `run.sh` to explore.
+
 ## <h2 id="deployment-on-mobile-devices">📲 Deployment on Mobile Devices </h2>
-Due to rapid development, MobileVLM's deployment strategy may be updated at any time. Currently, we exploit `llama.cpp` for the inference on mobile devices. We customized [llama.cpp](https://github.com/XiaotaoChen/llama.cpp/blob/MobileVLM/examples/llava/MobileVLM-README.md) to fit the architacture of MobileVLM.
-- [llama.cpp](https://github.com/XiaotaoChen/llama.cpp/tree/MobileVLM): the repository of MobileVLM-customized `llama.cpp`. Step-by-step deployment instructions are provided [here](https://github.com/XiaotaoChen/llama.cpp/blob/MobileVLM/examples/llava/MobileVLM-README.md).
+**MobileVLM** now is officially supported by `llama.cpp`. We are looking for more cooperation with open-source communities on the deployment of mobile devices.
+- [llama.cpp](https://github.com/ggerganov/llama.cpp): the repository of official `llama.cpp`. Step-by-step deployment instructions are provided [here](https://github.com/ggerganov/llama.cpp/blob/master/examples/llava/MobileVLM-README.md).
 ## 🤝 Acknowledgments
 
 - [LLaVA](https://github.com/haotian-liu/LLaVA): the codebase we built upon. Thanks for their wonderful work! 👏
