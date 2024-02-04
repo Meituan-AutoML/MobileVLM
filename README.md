@@ -241,13 +241,11 @@ bash run.sh mobilevlm1.7b pretrain-finetune-test ${LANGUAGE_MODEL} ${VISION_MODE
 
 If you find MobileVLM or MobileLLaMA useful in your research or applications, please consider giving a star ⭐ and citing using the following BibTeX:
 ```
-@misc{chu2023mobilevlm,
-      title={MobileVLM: A Fast, Strong and Open Vision Language Assistant for Mobile Devices}, 
-      author={Xiangxiang Chu and Limeng Qiao and Xinyang Lin and Shuang Xu and Yang Yang and Yiming Hu and Fei Wei and Xinyu Zhang and Bo Zhang and Xiaolin Wei and Chunhua Shen},
-      year={2023},
-      eprint={2312.16886},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV}
+@article{chu2023mobilevlm,
+  title={Mobilevlm: A fast, reproducible and strong vision language assistant for mobile devices},
+  author={Chu, Xiangxiang and Qiao, Limeng and Lin, Xinyang and Xu, Shuang and Yang, Yang and Hu, Yiming and Wei, Fei and Zhang, Xinyu and Zhang, Bo and Wei, Xiaolin and others},
+  journal={arXiv preprint arXiv:2312.16886},
+  year={2023}
 }
 ```
 
