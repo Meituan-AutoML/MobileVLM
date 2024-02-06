@@ -13,7 +13,7 @@ The MobileVLM architecture (right) utilizes MobileLLaMA as its language model, i
 ## 📸 Release
 
 * ⏳ MobileLLaMA Pre-training code.
-* ⏳ MobileLLaMA SFT training code.
+* **`Feb. 6th, 2024`**: The SFT code and dataset of MobileLLaMA are released now! You can train your own chat model.
 * **`Jan. 23th, 2024`**: 🚀🚀🚀 **MobileVLM** is officially supported by [`llama.cpp`](https://github.com/ggerganov/llama.cpp/blob/master/examples/llava/MobileVLM-README.md) now ! Have a try !
 * **`Jan. 15th, 2024`**: Customized `llama.cpp` for **MobileVLM** and its [deployment instruction](#deployment-on-mobile-devices) on mobile devices.
 * **`Jan. 11st, 2024`**: The training and evaluation codes of MobileVLM are available now! Follow these  step-by-step instructions below to easily train your own mobileVLM in **5 hours** ⚡️ !
@@ -101,6 +101,14 @@ inference_once(args)
 ```
 
 ## 🪜 Step-by-step Tutorial
+
+### MobileLLaMA
+
+The SFT(supervised fine-tuning) process of MobileLLaMA: 
+  - please refer to [MobileLLaMA_SFT.md](https://github.com/Meituan-AutoML/MobileVLM/blob/main/mobilellama/sft/MobileLLaMA_SFT.md) for the env, dataset and training code of our MobileLLaMA SFT.
+  - this training process takes around **3~5 hours** for MobileLLaMA 1.4B/2.7B on 8x A100 (80G) 
+
+Note: You may skip MobileLLaMA training processes and directly start with MobileVLM, leveraging our pre-trained MobileLLaMA model from huggingface website (🤗 [1.7B](https://huggingface.co/mtgv/MobileLLaMA-1.4B-Chat), [2.7B](https://huggingface.co/mtgv/MobileLLaMA-3B-Chat)). .
 
 ### MobileVLM
 
