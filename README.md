@@ -12,7 +12,7 @@ MobileVLM: Vision Language Model for Mobile Devices
 
 * **MobileVLM V2: Faster and Stronger Baseline for Vision Language Model** <br>
   [![arXiv](https://img.shields.io/badge/Arxiv-Comming-b31b1b.svg?logo=arXiv)](https://arxiv.org/abs/2312.16886) 
-  [![BibTex](https://img.shields.io/badge/📜-MobileVLM%20V2%20BibTex-Green.svg)](https://scholar.googleusercontent.com/scholar.bib?q=info:Sc8SlmxJLG0J:scholar.google.com/&output=citation&scisdr=ClHX_14jEI7KumULRqA:AFWwaeYAAAAAZcINXqAhqeJs6CWE6GSvazfOJ3w&scisig=AFWwaeYAAAAAZcINXhEXCuDAAgbQmwxVWHxSqJc&scisf=4&ct=citation&cd=-1&hl=en)
+  [![BibTex](https://img.shields.io/badge/📜-MobileVLM%20V2%20BibTex-Green.svg)](https://github.com/Meituan-AutoML/MobileVLM?tab=readme-ov-file#%EF%B8%8F-reference)
 
   <details> 
   <summary> 📌 Take a quick look at our MobileVLM V2 architecture </summary> 
@@ -30,7 +30,7 @@ MobileVLM: Vision Language Model for Mobile Devices
 
 * **MobileVLM: A Fast, Strong and Open Vision Language Assistant for Mobile Devices** <br>
   [![arXiv](https://img.shields.io/badge/Arxiv-2312.16886-b31b1b.svg?logo=arXiv)](https://arxiv.org/abs/2312.16886) 
-  [![BibTex](https://img.shields.io/badge/📜-MobileVLM%20BibTex-Green.svg)](https://scholar.googleusercontent.com/scholar.bib?q=info:Sc8SlmxJLG0J:scholar.google.com/&output=citation&scisdr=ClHX_14jEI7KumULRqA:AFWwaeYAAAAAZcINXqAhqeJs6CWE6GSvazfOJ3w&scisig=AFWwaeYAAAAAZcINXhEXCuDAAgbQmwxVWHxSqJc&scisf=4&ct=citation&cd=-1&hl=en)
+  [![BibTex](https://img.shields.io/badge/📜-MobileVLM%20BibTex-Green.svg)](https://github.com/Meituan-AutoML/MobileVLM?tab=readme-ov-file#%EF%B8%8F-reference)
 
   <details> 
   <summary> 📌 Take a quick look at our MobileVLM architecture </summary> 
