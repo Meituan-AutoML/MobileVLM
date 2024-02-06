@@ -256,7 +256,9 @@ def load_pretrained_model(model_path, load_8bit=False, load_4bit=False, device_m
     model.resize_token_embeddings(len(tokenizer))
 
     vision_tower = model.get_vision_tower()
-    if not vision_tower.is_loaded:
+    if 'v2' in getattr(model.config, "mm_projector_type", "ldpnet"):
+        vision_tower.load_image_processor()
+    elif not vision_tower.is_loaded:
         vision_tower.load_model()
     vision_tower.to(device=device, dtype=torch.float16)
     image_processor = vision_tower.image_processor

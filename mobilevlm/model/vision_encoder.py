@@ -23,6 +23,10 @@ class CLIPVisionTower(nn.Module):
         self.vision_tower = CLIPVisionModel.from_pretrained(self.vision_tower_name)
         self.vision_tower.requires_grad_(False)
         self.is_loaded = True
+
+    def load_image_processor(self):
+        self.image_processor = CLIPImageProcessor.from_pretrained(self.vision_tower_name)
+        self.is_loaded = True
     
     def feature_select(self, image_forward_outs):
         image_features = image_forward_outs.hidden_states[self.select_layer]
