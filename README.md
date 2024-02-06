@@ -23,7 +23,7 @@ MobileVLM: Vision Language Model for Mobile Devices
   <br>
   <p align="center"><img style="border-radius: 0.7125em;" width = "450" src="assets/mobilevlm_v2_arch.png"></p>
 
-  <font size=1>*MobileVLM V2’s architecture. $\mathbf{X}_v$ and $\mathbf{X}_q$ indicate image and language instruction, respectively, and $\mathbf{Y}_a$ refers to the text response from the language model MobileLLaMA. The diagram in the lower right corner is a detailed description of LDPv2, i.e., the lightweight downsample projector v2.*</font>
+  *MobileVLM V2’s architecture. X<sub>v</sub> and X<sub>q</sub> indicate image and language instruction, respectively, and Y<sub>a</sub> refers to the text response from the language model MobileLLaMA. The diagram in the lower right corner is a detailed description of LDPv2, i.e., the lightweight downsample projector v2.*
   
   <br>
   </details>
@@ -41,7 +41,7 @@ MobileVLM: Vision Language Model for Mobile Devices
   <br>
   <p align="center"><img style="border-radius: 0.7125em;" width = "450" src="assets/mobilevlm_arch.png"></p>
   
-  <font size=1>*The MobileVLM architecture (right) utilizes MobileLLaMA as its language model, intakes $\mathbf{X}_v$ and $\mathbf{X}_q$ which are image and language instructions as respective inputs and gives $\mathbf{Y}_a$ as the output language response. LDP refers to a lightweight downsample projector.*</font>
+  *The MobileVLM architecture (right) utilizes MobileLLaMA as its language model, intakes X<sub>v</sub> and X<sub>q</sub> which are image and language instructions as respective inputs and gives Y<sub>a</sub> as the output language response. LDP refers to a lightweight downsample projector.*
 
   <br>
   </details>
