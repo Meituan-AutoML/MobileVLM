@@ -18,15 +18,15 @@ MobileVLM: Vision Language Model for Mobile Devices
   <summary> 📌 Take a quick look at our MobileVLM V2 architecture </summary> 
   
   <br>
-  We introduce MobileVLM V2 , a family of significantly improved vision language models upon MobileVLM, which proves that a delicate orchestration of novel architectural design, an improved training scheme tailored for mobile VLMs, and rich high-quality dataset curation can substantially benefit VLMs’ performance. Specifically, MobileVLM V2 1.7B achieves better or on-par performance on standard VLM benchmarks compared with much larger VLMs at the 3B scale. Notably, our 3B model outperforms a large variety of VLMs at the 7B+ scale.
+  We introduce MobileVLM V2, a family of significantly improved vision language models upon MobileVLM, which proves that a delicate orchestration of novel architectural design, an improved training scheme tailored for mobile VLMs, and rich high-quality dataset curation can substantially benefit VLMs’ performance. Specifically, MobileVLM V2 1.7B achieves better or on-par performance on standard VLM benchmarks compared with much larger VLMs at the 3B scale. Notably, our 3B model outperforms a large variety of VLMs at the 7B+ scale.
   
   <br>
   <p align="center"><img style="border-radius: 0.7125em;" width = "450" src="assets/mobilevlm_v2_arch.png"></p>
 
   <font size=1>*MobileVLM V2’s architecture. $\mathbf{X}_v$ and $\mathbf{X}_q$ indicate image and language instruction, respectively, and $\mathbf{Y}_a$ refers to the text response from the language model MobileLLaMA. The diagram in the lower right corner is a detailed description of LDPv2, i.e., the lightweight downsample projector v2.*</font>
   
+  <br>
   </details>
-<br>
 
 * **MobileVLM: A Fast, Strong and Open Vision Language Assistant for Mobile Devices** <br>
   [![arXiv](https://img.shields.io/badge/Arxiv-2312.16886-b31b1b.svg?logo=arXiv)](https://arxiv.org/abs/2312.16886) 
@@ -62,12 +62,20 @@ MobileVLM: Vision Language Model for Mobile Devices
 
 ## 🦙 Model Zoo
 
-- [MobileLLaMA-1.4B-Base](https://huggingface.co/mtgv/MobileLLaMA-1.4B-Base)
-- [MobileLLaMA-1.4B-Chat](https://huggingface.co/mtgv/MobileLLaMA-1.4B-Chat)
-- [MobileLLaMA-2.7B-Base](https://huggingface.co/mtgv/MobileLLaMA-2.7B-Base)
-- [MobileLLaMA-2.7B-Chat](https://huggingface.co/mtgv/MobileLLaMA-2.7B-Chat)
-- [MobileVLM-1.7B](https://huggingface.co/mtgv/MobileVLM-1.7B)
-- [MobileVLM-3B](https://huggingface.co/mtgv/MobileVLM-3B)
+#### MobileVLM Family
+| Model | LLM | GQA | SQA<sup>I</sup> | VQA<sup>T</sup> | POPE | MME<sup>P</sup>  | MMB<sup>dev</sup> | Avg. |
+|-------|-------|---|-------|-------|-------|-------|-------|-------|
+| <div style="width: 93pt"> [MobileVLM-1.7B](https://huggingface.co/mtgv/MobileVLM-1.7B)    | <div style="width: 91pt"> [MobileLLaMA 1.4B](https://huggingface.co/mtgv/MobileLLaMA-1.4B-Chat) | 56.1   | 57.3  | 41.5  | 84.5 | 1196.2 | 53.2    | 58.7 |
+| [MobileVLM V2 1.7B](https://huggingface.co/mtgv/MobileVLM_V2-1.7B) | [MobileLLaMA 1.4B](https://huggingface.co/mtgv/MobileLLaMA-1.4B-Chat) | **59.3**   | **66.7**  | **52.1**  | **84.3** | **1302.8** | **57.7**    | **64.2** |
+| [MobileVLM-3B](https://huggingface.co/mtgv/MobileVLM-3B)      | [MobileLLaMA 2.7B](https://huggingface.co/mtgv/MobileLLaMA-2.7B-Chat) |  59.0   | 61.2  | 47.5  | 84.9 | 1288.9 | 59.6    | 62.8 |
+| [MobileVLM V2 3B](https://huggingface.co/mtgv/MobileVLM_V2-3B)   | [MobileLLaMA 2.7B](https://huggingface.co/mtgv/MobileLLaMA-2.7B-Chat) |  **61.1**   | **70.0**  | **57.5**  | **84.7** | **1440.5** | **63.2**    | **68.1** |
+| [MobileVLM V2 7B](https://huggingface.co/mtgv/MobileVLM_V2-7B)   | [Vicuna-7B](https://huggingface.co/lmsys/vicuna-7b-v1.5)       |  **62.6**   | **74.8**  | **62.3**  | **85.3** | **1560.7** | **69.2**    | **72.1** |
+
+#### MobileLLaMA Family
+  - [MobileLLaMA-1.4B-Base](https://huggingface.co/mtgv/MobileLLaMA-1.4B-Base)
+  - [MobileLLaMA-1.4B-Chat](https://huggingface.co/mtgv/MobileLLaMA-1.4B-Chat)
+  - [MobileLLaMA-2.7B-Base](https://huggingface.co/mtgv/MobileLLaMA-2.7B-Base)
+  - [MobileLLaMA-2.7B-Chat](https://huggingface.co/mtgv/MobileLLaMA-2.7B-Chat)
 
 🔔 **Usage and License Notices**: This project utilizes certain datasets and checkpoints that are subject to their respective original licenses. Users must comply with all terms and conditions of these original licenses. This project is licensed permissively under the Apache 2.0 license and does not impose any additional constraints. <sup>[LLaVA](https://github.com/haotian-liu/LLaVA/tree/main?tab=readme-ov-file#release)</sup>
 
