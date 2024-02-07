@@ -51,7 +51,7 @@ MobileVLM: Vision Language Model for Mobile Devices
 
 * ⏳ MobileLLaMA Pre-training code.
 * ⏳ MobileVLM V2 training data and code are being sorted out.
-* **`Feb. 06th, 2024`**: 🔥🔥🔥 **MobileVLM V2** is out! Paper [here](https://arxiv.org/abs/2402.03766)! The evaluation code of MobileVLM V2 is available now! Our MobileVLM V2 weights are publicly avaliable on the HuggingFace website. Enjoy [them](https://huggingface.co/mtgv/) !
+* **`Feb. 06th, 2024`**: 🔥🔥🔥 **MobileVLM V2** is out! Paper [here](https://arxiv.org/abs/2402.03766)! The inference code of MobileVLM V2 is available now! Our MobileVLM V2 weights are publicly avaliable on the HuggingFace website. Enjoy [them](https://huggingface.co/mtgv/) !
 * **`Feb. 06th, 2024`**: The SFT code and dataset of MobileLLaMA are released now! You can train your own chat model.
 * **`Jan. 23rd, 2024`**: 🚀🚀🚀 **MobileVLM** is officially supported by [`llama.cpp`](https://github.com/ggerganov/llama.cpp/blob/master/examples/llava/MobileVLM-README.md) now ! Have a try !
 * **`Jan. 15th, 2024`**: Customized `llama.cpp` for **MobileVLM** and its [deployment instruction](#deployment-on-mobile-devices) on mobile devices.
@@ -120,12 +120,12 @@ print(tokenizer.decode(generation_output[0]))
 ```
 * For more advanced usage, please follow the [transformers LLaMA documentation](https://huggingface.co/docs/transformers/main/model_doc/llama).
 
-#### Example for MobileVLM model inference
+#### Example for MobileVLM/MobileVLM V2 model inference
 
 ```python
 from scripts.inference import inference_once
-
-model_path = "mtgv/MobileVLM-1.7B"
+# model_path = "mtgv/MobileVLM-1.7B" # MobileVLM
+model_path = "mtgv/MobileVLM_V2-1.7B" # MobileVLM V2
 image_file = "assets/samples/demo.jpg"
 prompt_str = "Who is the author of this book?\nAnswer the question using a single word or phrase."
 # (or) What is the title of this book?
