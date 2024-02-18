@@ -308,7 +308,7 @@ If you find MobileVLM or MobileLLaMA useful in your research or applications, pl
 
 @article{chu2024mobilevlm,
   title={MobileVLM V2: Faster and Stronger Baseline for Vision Language Model},
-  author={Chu, Xiangxiang and Qiao, Limeng and Zhang, Xinyu and Xu, Shuang and Wei, Fei and Yang, Yang and Sun, Xiaofei and Hu, Yiming and Lin, Xinyang and Zhang, Bo and Shen, Chunhua},
+  author={Chu, Xiangxiang and Qiao, Limeng and Zhang, Xinyu and Xu, Shuang and Wei, Fei and Yang, Yang and Sun, Xiaofei and Hu, Yiming and Lin, Xinyang and Zhang, Bo and others},
   journal={arXiv preprint arXiv:2402.03766},
   year={2024}
 }
