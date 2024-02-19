@@ -1,7 +1,7 @@
 # MobileLLaMA SFT
 
 ## 🛠️ Installation
-Our MobileLLaMA SFT based on [FastChat](https://github.com/lm-sys/FastChat) (commit id: 81785d7ed1d6afb966b464a8ee4689b7413e6313)
+Our MobileLLaMA SFT training code is based on [FastChat](https://github.com/lm-sys/FastChat) (commit id: 81785d7ed1d6afb966b464a8ee4689b7413e6313)
 
 ### Install From Source.
 1. Clone the [FastChat](https://github.com/lm-sys/FastChat) repository and navigate to the FastChat folder
@@ -27,7 +27,7 @@ You can download MobileLLaMA-1.4B-Base / MobileLLaMA-2.7B-Base model from huggin
 ## Dataset
 We use the sft dataset in Vicuna fromat can be download from link: [ShareGPT_Vicuna_dataset](https://huggingface.co/datasets/Aeala/ShareGPT_Vicuna_unfiltered), and follow the steps:
 1. download the [json](https://huggingface.co/datasets/Aeala/ShareGPT_Vicuna_unfiltered/blob/main/ShareGPT_V4.3_unfiltered_cleaned_split.json) file to local data path.
-2. white the correct "--data_path" in the training script.
+2. write the correct "--data_path" in your SFT training scripts.
 
 ## 💎 Training
 Our training process can be reproduced by runing the scrips:
