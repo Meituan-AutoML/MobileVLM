@@ -81,6 +81,7 @@ class TrainingArguments(transformers.TrainingArguments):
     lora_dropout: float = 0.05
     lora_weight_path: str = ""
     lora_bias: str = "none"
+    mm_projector_lr: Optional[float] = None
     group_by_modality_length: bool = field(default=False)
 
 
@@ -853,6 +854,8 @@ def train():
         model.config.tune_mm_mlp_adapter = training_args.tune_mm_mlp_adapter = model_args.tune_mm_mlp_adapter
         model.config.vision_tower_type = training_args.vision_tower_type = model_args.vision_tower_type
 
+        model.requires_grad_(True)
+
         if model_args.tune_mm_mlp_adapter:
             model.requires_grad_(False)
             for p in model.get_model().mm_projector.parameters():
@@ -863,12 +866,14 @@ def train():
             for p in model.get_model().mm_projector.parameters():
                 p.requires_grad = False
 
+
         if training_args.bits in [4, 8]:
             model.get_model().mm_projector.to(dtype=compute_dtype, device=training_args.device)
 
         model.config.mm_use_im_start_end = data_args.mm_use_im_start_end = model_args.mm_use_im_start_end
         training_args.use_im_start_end = model_args.mm_use_im_start_end
         model.config.mm_use_im_patch_token = model_args.mm_use_im_patch_token
+        model.config.mm_projector_lr = training_args.mm_projector_lr
         model.initialize_vision_tokenizer(model_args, tokenizer=tokenizer)
 
     if training_args.bits in [4, 8]:

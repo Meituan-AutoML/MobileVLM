@@ -27,6 +27,29 @@ class MobileVLMMetaModel:
         mm_vision_select_feature = model_args.mm_vision_select_feature
         pretrain_mm_mlp_adapter = model_args.pretrain_mm_mlp_adapter
         self.config.mm_vision_tower = model_args.vision_tower
+        vision_tower = model_args.vision_tower
+
+        if self.get_vision_tower() is None:
+            vision_tower = build_vision_tower(model_args)
+
+            if fsdp is not None and len(fsdp) > 0:
+                self.vision_tower = [vision_tower]
+            else:
+                self.vision_tower = vision_tower
+        elif self.get_vision_tower().vision_tower_name != vision_tower:
+            vision_tower = build_vision_tower(model_args)
+            if fsdp is not None and len(fsdp) > 0:
+                self.vision_tower = [vision_tower]
+            else:
+                self.vision_tower = vision_tower
+        else:
+            if fsdp is not None and len(fsdp) > 0:
+                vision_tower = self.vision_tower[0]
+                vision_tower.load_model()
+            else:
+                vision_tower = self.vision_tower
+                vision_tower.load_model()
+
         self.config.use_mm_proj = True
         self.config.mm_projector_type = getattr(model_args, 'mm_projector_type', 'linear')
         self.config.mm_vision_select_layer = mm_vision_select_layer
@@ -39,7 +62,8 @@ class MobileVLMMetaModel:
             self.vision_tower = vision_tower
         self.config.mm_hidden_size = vision_tower.hidden_size
         # Build Vision-Projector
-        self.mm_projector = build_vision_projector(self.config)
+        if getattr(self, 'mm_projector', None) is None:
+            self.mm_projector = build_vision_projector(self.config)
         if pretrain_mm_mlp_adapter is not None:
             mm_projector_weights = torch.load(pretrain_mm_mlp_adapter, map_location='cpu')
             def get_w(weights, keyword):

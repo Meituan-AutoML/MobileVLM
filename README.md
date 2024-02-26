@@ -50,8 +50,8 @@ MobileVLM: Vision Language Model for Mobile Devices
 ## 📸 Release
 
 * ⏳ MobileLLaMA Pre-training code.
-* ⏳ MobileVLM V2 training data and code are being sorted out.
-* **`Feb. 06th, 2024`**: 🔥🔥🔥 **MobileVLM V2** is out! Paper [here](https://arxiv.org/abs/2402.03766)! The inference code of MobileVLM V2 is available now! Our MobileVLM V2 weights are publicly avaliable on the HuggingFace website. Enjoy [them](https://huggingface.co/mtgv/) !
+* **`Feb. 26th, 2024`**: MobileVLM V2 training data and code are available now! Follow the instructions below to train your own mobileVLM V2 model !
+* **`Feb. 06th, 2024`**: 🔥🔥🔥 **MobileVLM V2** is out! Paper [here](https://arxiv.org/abs/2402.03766)! The inference code of MobileVLM V2 is available now! Our MobileVLM V2 weights are publicly available on the HuggingFace website. Enjoy [them](https://huggingface.co/mtgv/) !
 * **`Feb. 06th, 2024`**: The SFT code and dataset of MobileLLaMA are released now! You can train your own chat model.
 * **`Jan. 23rd, 2024`**: 🚀🚀🚀 **MobileVLM** is officially supported by [`llama.cpp`](https://github.com/ggerganov/llama.cpp/blob/master/examples/llava/MobileVLM-README.md) now ! Have a try !
 * **`Jan. 15th, 2024`**: Customized `llama.cpp` for **MobileVLM** and its [deployment instruction](#deployment-on-mobile-devices) on mobile devices.
@@ -149,43 +149,35 @@ inference_once(args)
 
 ## 🪜 Step-by-step Tutorial
 
-### MobileVLM V2
-🏃 Training code and user guidelines are coming soon.
-
-### MobileLLaMA
-
-The SFT(supervised fine-tuning) process of MobileLLaMA: 
-  - please refer to [MobileLLaMA_SFT.md](https://github.com/Meituan-AutoML/MobileVLM/blob/main/mobilellama/sft/MobileLLaMA_SFT.md) for the env, dataset and training code of our MobileLLaMA SFT.
-  - this training process takes around **3~5 hours** for MobileLLaMA 1.4B/2.7B on 8x A100 (80G) 
-
-Note: You may skip MobileLLaMA training processes and directly start with MobileVLM, leveraging our pre-trained MobileLLaMA model from huggingface website (🤗 [1.7B](https://huggingface.co/mtgv/MobileLLaMA-1.4B-Chat), [2.7B](https://huggingface.co/mtgv/MobileLLaMA-3B-Chat)). .
-
 ### MobileVLM
 
-The training process of MobileVLM is divided into two stages:
+The training process of MobileVLM V2 is divided into two stages:
 
-- stage I: feature alignment pretrain
-  - ❄️ frozen vision encoder + 🔥 **learnable** LDP projector + ❄️ frozen LLM
-  - this training process takes around **1~1.5 hours** for MobileVLM-1.7B/3B on 8x A100 (80G) with a batch size of 256 and an average of approximately 15G/19G of GPU memory required.
-- stage II: visual instruction tuning
-  - ❄️ frozen vision encoder + 🔥 **learnable** LDP projector + 🔥 **learnable** LLM
-  - this training process takes around **2~3.5 hours** for MobileVLM-1.7B/3B on 8x A100 (80G) with a batch size of 128 and an average of approximately 46G/52G of GPU memory required.
-
-Note: To train on fewer GPU memory or cards, you can reduce the `per_device_train_batch_size` and increase the `gradient_accumulation_steps` accordingly. Always keep the `global batch size` the same: `per_device_train_batch_size` x `gradient_accumulation_steps` x `num_gpus`.
+- stage I: pre-training
+  - ❄️ frozen vision encoder + 🔥 **learnable** LDP V2 projector + 🔥 **learnable** LLM
+  - this training process takes around **3~5 hours** for MobileVLM V2-1.7B/3B on 8x A100 (80G) with a batch size of 256 and an average of approximately 38G/51G of GPU memory required.
+- stage II: multi-task training
+  - ❄️ frozen vision encoder + 🔥 **learnable** LDP V2 projector + 🔥 **learnable** LLM
+  - this training process takes around **9~12 hours** for MobileVLM V2-1.7B/3B on 8x A100 (80G) with a batch size of 128 and an average of approximately 45G/52G of GPU memory required.
+- *note: if you are interest in MobileVLM V1 training recipe, please refer to our previous [README](https://github.com/Meituan-AutoML/MobileVLM/tree/mobilevlm-v1).*
 
 #### 1️⃣ Prepare MobileLLaMA checkpoints
 
-Download MobileLLaMA chatbot checkpoints from huggingface website (🤗 [1.7B](https://huggingface.co/mtgv/MobileLLaMA-1.4B-Chat), [2.7B](https://huggingface.co/mtgv/MobileLLaMA-3B-Chat)). Please note that this is **optional** (it depends on your working environment), run the training script we provide below and the model will be automatically downloaded by the `transformers` library.
+Similar to MobileVLM, please firstly download MobileLLaMA chatbot checkpoints from huggingface website (🤗 [1.7B](https://huggingface.co/mtgv/MobileLLaMA-1.4B-Chat), [2.7B](https://huggingface.co/mtgv/MobileLLaMA-3B-Chat)). Please note that this is **optional** (it depends on your working environment), run the training script we provide below and the model will be automatically downloaded by the `transformers` library.
 
 #### 2️⃣ Prepare data
 - For convenience, assume your working directory `/path/to/project/mobilevlm` as `work_dir`: 
   - `cd ${work_dir} && mkdir -p data/pretrain_data data/finetune_data data/benchmark_data`
-- prepare alignment pre-training data
+- prepare pre-training data
   - `cd ${work_dir}/data/pretrain_data`
-  - download the LLaVA-558K from [here](https://huggingface.co/datasets/liuhaotian/LLaVA-Pretrain), which is provided by LLaVA team.
-- prepare  instruction tuning data
+  - download the ShareGPT4V-PT from [here](https://huggingface.co/datasets/Lin-Chen/ShareGPT4V/blob/main/share-captioner_coco_lcs_sam_1246k_1107.json), which is provided by ShareGPT4V team.
+- prepare multi-task training data
   - `cd ${work_dir}/data/finetune_data`
-  - download the annotation of the LLaVA mixture instruction tuning data [here](https://huggingface.co/datasets/liuhaotian/LLaVA-Instruct-150K/blob/main/llava_v1_5_mix665k.json), and download the images from constituting datasets: [COCO](http://images.cocodataset.org/zips/train2017.zip), [GQA](https://downloads.cs.stanford.edu/nlp/data/gqa/images.zip), [OCR-VQA](https://drive.google.com/drive/folders/1_GYPY5UkUy7HIcR0zq3ZCFgeZN7BAfm_?usp=sharing), [TextVQA](https://dl.fbaipublicfiles.com/textvqa/images/train_val_images.zip), [VisualGnome](https://cs.stanford.edu/people/rak248/VG_100K_2) ([Part1](https://cs.stanford.edu/people/rak248/VG_100K_2/images.zip), [Part2](https://cs.stanford.edu/people/rak248/VG_100K_2/images2.zip))
+  - download the annotation of our MobileVLM_V2_FT_Mix2M data from huggingface [here](https://huggingface.co/datasets/mtgv/MobileVLM_V2_FT_Mix2M), and download the images from constituting datasets: 
+  [Text-VQA](https://dl.fbaipublicfiles.com/textvqa/images/train_val_images.zip), 
+  [IConQA](https://drive.google.com/file/d/1Xqdt1zMcMZU5N_u1SAIjk-UAclriynGx/edit), [SQA](https://drive.google.com/drive/folders/1w8imCXWYn2LxajmGeGH_g5DaL2rabHev), [SBU](https://huggingface.co/datasets/sbu_captions), follow [ShareGPT4V](https://github.com/InternLM/InternLM-XComposer/blob/main/projects/ShareGPT4V/docs/Data.md) to download images from:
+  [LAION-CC-SBU-558K](https://huggingface.co/datasets/liuhaotian/LLaVA-Pretrain/blob/main/images.zip), [COCO](http://images.cocodataset.org/zips/train2017.zip), [WebData](https://drive.google.com/drive/folders/1tCUQ-sq6vdshZVkF0ZeF3K4eztkXJgax?usp=sharing), [SAM](https://drive.google.com/file/d/1dKumdOKSXtV7lIXdrG7jsIK_z2vZv2gs/view?usp=drive_link), [GQA](https://downloads.cs.stanford.edu/nlp/data/gqa/images.zip), [OCR-VQA](https://drive.google.com/drive/folders/1_GYPY5UkUy7HIcR0zq3ZCFgeZN7BAfm_?usp=sharing), [TextVQA](https://dl.fbaipublicfiles.com/textvqa/images/train_val_images.zip), [VisualGnome](https://cs.stanford.edu/people/rak248/VG_100K_2) ([Part1](https://cs.stanford.edu/people/rak248/VG_100K_2/images.zip), [Part2](https://cs.stanford.edu/people/rak248/VG_100K_2/images2.zip))
+
 - prepare benchmark data
   - We evaluate models on a diverse set of 6 benchmarks, *i.e.* GQA, MMBench, MME, POPE, SQA, TextVQA. We do not evaluate using beam search to make the inference process consistent with the chat demo of real-time outputs. You should follow these instructions to manage the datasets.
   - <details>
@@ -213,7 +205,6 @@ Download MobileLLaMA chatbot checkpoints from huggingface website (🤗 [1.7B](h
       - no action is needed.
 
     </details>
-
 
 - organize the `data` directory as follows after downloading all of them: 
   - <details>
@@ -251,25 +242,53 @@ Download MobileLLaMA chatbot checkpoints from huggingface website (🤗 [1.7B](h
     │   └── textvqa
     │       ├── eval.py
     │       ├── llava_textvqa_val_v051_ocr.jsonl
-    │       ├── m4c_evaluator.py
     │       ├── TextVQA_0.5.1_val.json
     │       └── train_images -> /path/to/your/textvqa/train_images
     ├── finetune_data
-    │    ├── llava_v1_5_mix665k.json
-    │    ├── coco
-    │    │   └── train2017
-    │    ├── gqa
-    │    │   └── images
-    │    ├── ocr_vqa
-    │    │   └── images
-    │    ├── textvqa
-    │    │   └── train_images
-    │    └── vg
-    │        ├── VG_100K
-    │        └── VG_100K_2
-    ├── pretrain_data
-    │    ├── images
-    │    └── blip_laion_cc_sbu_558k.json
+    │   ├── llava_v1_5_mix665k.json
+    │   ├── MobileVLM_V2_FT_Mix2M.json
+    │   ├── coco
+    │   │   ├── train2017
+    │   │   └── val2017
+    │   ├── gqa
+    │   │   └── images
+    │   ├── iconqa_data
+    │   │   └── iconqa
+    │   │       └── train
+    │   │           ├── choose_img
+    │   │           ├── choose_txt
+    │   │           └── fill_in_blank
+    │   ├── ocr_vqa
+    │   │   └── images
+    │   ├── sam
+    │   │   └── images
+    │   ├── SBU
+    │   │   └── images
+    │   ├── ScienceQA
+    │   │   └── train
+    │   ├── share_textvqa
+    │   │   └── images
+    │   ├── textvqa
+    │   │   └── train_images
+    │   ├── vg
+    │   │   ├── VG_100K
+    │   │   └── VG_100K_2
+    │   ├── web-celebrity
+    │   │   └── images
+    │   ├── web-landmark
+    │   │   └── images
+    │   └── wikiart
+    │       └── images
+    └── pretrain_data
+        ├── share-captioner_coco_lcs_sam_1246k_1107.json
+        ├── blip_laion_cc_sbu_558k.json
+        ├── images
+        ├── coco
+        │   └── train2017
+        ├── llava
+        │   └── llava_pretrain
+        └── sam
+            └── images
     ```
     </details>
 
@@ -277,13 +296,22 @@ Download MobileLLaMA chatbot checkpoints from huggingface website (🤗 [1.7B](h
 ```shell
 LANGUAGE_MODEL=/path/to/your/MobileLLaMA-1.4B-Chat  # or 2.7B
 VISION_MODEL=/path/to/your/clip-vit-large-patch14-336
-bash run.sh mobilevlm1.7b pretrain-finetune-test ${LANGUAGE_MODEL} ${VISION_MODEL}
+bash run.sh mobilevlm_v2_1.7b pretrain-finetune-test ${LANGUAGE_MODEL} ${VISION_MODEL}
 
-# (test-only) bash run.sh mobilevlm1.7b test /path/to/your/own/checkpoint
-# (3B) bash run.sh mobilevlm3b pretrain-finetune-test ${LANGUAGE_MODEL} ${VISION_MODEL}
+# (test-only) bash run.sh mobilevlm_v2_1.7b test /path/to/your/own/checkpoint
+# (3B) bash run.sh mobilevlm_v2_3b pretrain-finetune-test ${LANGUAGE_MODEL} ${VISION_MODEL}
 ```
 
 - Note 🧭: We place all running commands in `run.sh` so they can be run with one click for simplification. If you would like to modify some super-parameters to observe their impact, please dive into `run.sh` to explore.
+
+
+### MobileLLaMA
+
+The SFT(supervised fine-tuning) process of MobileLLaMA: 
+  - please refer to [MobileLLaMA_SFT.md](https://github.com/Meituan-AutoML/MobileVLM/blob/main/mobilellama/sft/MobileLLaMA_SFT.md) for the env, dataset and training code of our MobileLLaMA SFT.
+  - this training process takes around **3~5 hours** for MobileLLaMA 1.4B/2.7B on 8x A100 (80G) 
+
+Note: You may skip MobileLLaMA training processes and directly start with MobileVLM, leveraging our pre-trained MobileLLaMA model from huggingface website (🤗 [1.7B](https://huggingface.co/mtgv/MobileLLaMA-1.4B-Chat), [2.7B](https://huggingface.co/mtgv/MobileLLaMA-3B-Chat)). .
 
 ## <h2 id="deployment-on-mobile-devices">📲 Deployment on Mobile Devices </h2>
 **MobileVLM** now is officially supported by `llama.cpp`. We are looking for more cooperation with open-source communities on the deployment of mobile devices.
@@ -312,7 +340,6 @@ If you find MobileVLM or MobileLLaMA useful in your research or applications, pl
   journal={arXiv preprint arXiv:2402.03766},
   year={2024}
 }
-
 ```
 
 
