@@ -113,6 +113,57 @@ case ${TASK} in
         cd ${WORK_DIR}
         OUTPUT_DIR=$3
         bash scripts/benchmark.sh ${OUTPUT_DIR}
+    ;;    
+    "finetune.lora")
+        echo ">>> Start Visual-Instruction Tuning with LoRA..."
+        cd ${WORK_DIR}
+        LANGUAGE_MODEL=$3
+        VISION_MODEL=$4
+        OUTPUT_DIR=$5
+        OUTPUT_DIR_PT=${OUTPUT_DIR}/mobilevlm_v2-1.pretrain
+        OUTPUT_DIR_FT=${OUTPUT_DIR}/mobilevlm_v2-2.finetune-lora
+        mkdir -p ${OUTPUT_DIR_FT}
+        declare -A DS_CONF
+        deepspeed mobilevlm/train/train_mem.py \
+            --deepspeed scripts/deepspeed/zero3.json \
+            --lora_enable True --lora_r 128 --lora_alpha 256 \
+            --learning_rate 2e-4 \
+            --model_name_or_path ${OUTPUT_DIR_PT} \
+            --version v1 \
+            --data_path data/finetune_data/MobileVLM_V2_FT_Mix2M.json \
+            --image_folder data/finetune_data \
+            --vision_tower ${VISION_MODEL} \
+            --vision_tower_type clip \
+            --mm_projector_type ldpnetv2 \
+            --mm_vision_select_layer -2 \
+            --mm_use_im_start_end False \
+            --mm_use_im_patch_token False \
+            --image_aspect_ratio pad \
+            --group_by_modality_length True \
+            --bf16 True \
+            --output_dir ${OUTPUT_DIR_FT} \
+            --num_train_epochs 1 \
+            --per_device_train_batch_size 16 \
+            --per_device_eval_batch_size 4 \
+            --gradient_accumulation_steps 1 \
+            --evaluation_strategy "no" \
+            --save_strategy "steps" \
+            --save_steps 50000 \
+            --save_total_limit 1 \
+            --weight_decay 0. \
+            --warmup_ratio 0.03 \
+            --lr_scheduler_type "cosine" \
+            --logging_steps 1 \
+            --tf32 True \
+            --model_max_length 2048 \
+            --gradient_checkpointing True \
+            --dataloader_num_workers 4 \
+            --lazy_preprocess True \
+            --report_to none \
+            2>&1 | tee -a ${OUTPUT_DIR_FT}/log.txt &&
+        python3 scripts/mergelora.py ${OUTPUT_DIR_PT} ${OUTPUT_DIR}/mobilevlm_v2-2.finetune-lora ${OUTPUT_DIR}/mobilevlm_v2-2.finetune \
+            2>&1 | tee -a ${OUTPUT_DIR_FT}/log.txt &&
+        echo "Done."
     ;;
     *)
         echo "error with ${DATASET_ID}"
