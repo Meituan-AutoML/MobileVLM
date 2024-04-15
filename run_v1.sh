@@ -130,10 +130,12 @@ case ${TASK} in
         mkdir -p ${OUTPUT_DIR_FT}
         declare -A DS_CONF
         DS_CONF=([mobilevlm1.7b]=zero2 [mobilevlm3b]=zero3)
+        declare -A LR_CONF
+        LR_CONF=([mobilevlm1.7b]=1e-4 [mobilevlm3b]=2e-4)
         deepspeed mobilevlm/train/train_mem.py \
             --deepspeed scripts/deepspeed/${DS_CONF[${ARCH}]}.json \
             --lora_enable True --lora_r 128 --lora_alpha 256 \
-            --learning_rate 2e-4 \
+            --learning_rate ${LR_CONF[${ARCH}]} \
             --model_name_or_path ${LANGUAGE_MODEL} \
             --version v1 \
             --data_path data/finetune_data/llava_v1_5_mix665k.json \

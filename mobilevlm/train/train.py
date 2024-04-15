@@ -142,7 +142,11 @@ def get_mm_adapter_state_maybe_zero_3(named_params, keys_to_match):
 def find_all_linear_names(model):
     cls = torch.nn.Linear
     lora_module_names = set()
+    multimodal_keywords = ['mm_projector', 'vision_tower', 'vision_resampler']
+
     for name, module in model.named_modules():
+        if any(mm_keyword in name for mm_keyword in multimodal_keywords):
+            continue
         if isinstance(module, cls):
             names = name.split('.')
             lora_module_names.add(names[0] if len(names) == 1 else names[-1])
@@ -854,7 +858,8 @@ def train():
         model.config.tune_mm_mlp_adapter = training_args.tune_mm_mlp_adapter = model_args.tune_mm_mlp_adapter
         model.config.vision_tower_type = training_args.vision_tower_type = model_args.vision_tower_type
 
-        model.requires_grad_(True)
+        if not training_args.lora_enable:
+            model.requires_grad_(True)
 
         if model_args.tune_mm_mlp_adapter:
             model.requires_grad_(False)
@@ -910,6 +915,7 @@ def train():
         if training_args.local_rank == 0 or training_args.local_rank == -1:
             model.config.save_pretrained(training_args.output_dir)
             model.save_pretrained(training_args.output_dir, state_dict=state_dict)
+            print('non_lora_trainable...', non_lora_state_dict.keys())
             torch.save(non_lora_state_dict, os.path.join(training_args.output_dir, 'non_lora_trainables.bin'))
     else:
         safe_save_model_for_hf_trainer(trainer=trainer, output_dir=training_args.output_dir)
